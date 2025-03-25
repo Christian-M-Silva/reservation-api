@@ -1,0 +1,156 @@
+- Criar um model base que terá o id, E QUANDO FOI CRIADO OU ATUALIZADO 
+
+- Criar um model de enum para role que só poderá ser  User ou Admin
+
+- Criar um model da tabela de user, que terá nome, senha, e-mail e role (que será do tipo role), refreshToken (Pode ser nulo), expiretdeRefreshToken(Pode ser nulo e Datetime) ele extende da model base
+
+- Criar um model de request de user login que terá e-mail e senha
+
+- Criar um model de request de registrar user que herdará o request de user login e a terá a mais Nome, e o Enum de role
+
+- Criar um model de refreshToken que tem um refreshToken que é string e um DateTime que é a data de expiração
+
+- Criar model de Reserva  com Id que pode ser nulo, nome cliente que pode ser nulo, data de checkin e data de checkout, número do quarto, IdCliente
+
+- Criar model de requestFilter com DateTime para check-in e int para número do quarto lembrando que podem ser valores nulos
+
+- Criar um model da tabela de log, em que será registrado o tipo de requisição, a rota, o tempo 
+
+- Intalar o EF
+
+- Criar a conexão com o bd e o contexto criando a tabela de user, logs e de reservas
+
+- Fazer o mapeamento da coluna de e-mail para ser única 
+
+- Criar as migrations
+
+- Instalar o JWT
+
+- Configurar o JWT
+	- Essa service do JWT espera receber a role (do tipo role), e-mail e o ID do cliente
+	- Incluir nas clains do JWT as roles e o id do cliente
+
+- Criar na service um método de criptografar e validar senha, sendo que o de criptografar, retornar a senha criptografada e o validador, retorna um bool se a validação está certa
+
+- Rota de cadastro
+	- Controller Post
+		- Recebe Nome, Senha, role(Enum: User ou Admin), e-mail de acordo com o model de request de registrar user
+		- Fazer tratativa se a role for uma que não exista
+		- Se der algum erro retornar como erro interno 500
+		- Se der certo retornar um 201 com o e-mail e nome de usuário criado
+	- Service
+		- Criar uma Interface dessa service informando que existirá um método de cadastro que retornar um tipo model da tabela de user
+		- Chama a service que tem o método de criptografar a senha e passa para o repositor os dados recebidos no front com a senha criptografada
+	- Repository
+		- Criar uma Interface desse repositor informando que existirá um método de cadastro, retornar um tipo model da tabela de user
+		- Salva no banco de dados de user os dados recebidos da service e retornar esse dado salvo
+
+- Rota de login
+	- Controller post
+		- Esperar chegar os dados de model de request de user login
+		- Manda para a service o email e senha essa service retorna true ou false
+		- Se retornar false, retornar uma mensagem para o usuário informando que senha e e-mail errado com status code 403
+		- Se retornar true ele gera o token jwt
+		- Se der tudo certo na geração do JWT ele gera um refresh token, chamado a servisse e passando o e-mail se retornar null ele retorna um 403
+		- E retorna o JWT e o Refrsh Token com o status code 200
+	- Service
+		- Criar uma Interface dessa service que retorna true ou false e outro método nessa interface que gera um refresh token e retorna uma string de refreshToken
+		- O método que retornar true ou false
+			- Chama o método da repositor passando o e-mail e deve retornar a senha que está no bd
+			- Validar se retornou alguma coisa, se retornar null significa que esse user é errado ai retornar false para controller
+			- Se o repositor retornr algum e-mail ele chama a service que tem o método de validar a senha passando a senha que o usuário passou e a senha criptografada recebida pelo banco e retornar para o controller o resultado boolean da validação
+		- O método do refresh token
+			- passa para o repor o e-mail e retorna o resultado
+			- Se retornar null repaço para controller
+	- Reporsitorio
+		- Criar uma Interface desse repor que retornar uma string que é a senha e o método de refreshToken que retorna um refreshToken
+		- Pesquisar no bd pelo e-mail retornado a senha se encontrar o user, senão o null
+		- O que retornar refresh token ele salva o rfresh token na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
+
+- Rota de refresh token 
+	- Controller put
+		- Esperar receber uma string que é o refresh controller
+		- Chama a servisse de validar se o token é valido e se existe, se retornar null ai retorno um 401
+		- Se após validar ele existir normal, ai eu só chamo o método de gerar JWT passando o Role do user e o e-mail recebido e o id e retorno o JWT se der tudo certo com o status 200
+	- Service
+		- Criar interface de validar se o refresh token é valido retornar um tipo de User
+		- O método de validar o refresh recebe o refresh token e passa para o repor o refreshToken enviado pelo user
+			- O retorno do repor tem que valida, se retornar null então retono para controller um null
+			- Se retornar um refresh token, preciso validar se ele não expirou.
+				- se ele não expirou retorno para a controller o User
+				- Se ele expirou, chamo o repor de excluir refreshToken passando e-mail e depois retornou null
+	- Repor
+		- Interface e método de validar se o refresh token recebido existe, se existir vai retornar um tipo User
+		- Interface e método de excluir se o refresh token recebido onde vou procurar o refrsh token e excluir esse refresh token, não retorna nada ele é void
+
+- Rota de de criar reserva acessada por USER
+	- Controller post /reservas
+		- Chame a servisse passando os dados que vieram do front, e o nome, id e e-mail vão vim do token de quem está usando, essa controller espera receber os dados do tipo Reserva
+		- Se deu tudo certo retorna 201 e a reserva criada, do contraio retonar um status de erro
+	- Service
+		- Criar interface e método que passe os dados recebidos da controller e retornem o tipo reservas
+	- Repo Tem que ser genérico
+		- Criar interface e método que salve os dados recebidos da servisse e cria os dados necessarios e retornem o tipo reservas
+
+
+- Rota de de VISUALIZAR UMAs determinadas reservas que é a própria acessada por USER
+	- Controller get (rota), ele terá queryParam de filtro, em que poderá ser pesquisado data de checkin e numero do quarto o tipo requestFilter
+		- passa para a service a data de check-in se tiver, npumero do quarto, se tiver e o id do user que está no JWT esse é o unico obrigatorio a ser passado
+		- Ai se não der nenhum erro, só retorno as reservas
+	- Service
+		- Criar interface e implementar método em que Repasso os dados para o repo
+	- Repo Tem que ser genérico
+		- Criar interface e implementar método em que analiso se existe algum dado passado pelo query params para filtrar se sim ele retornar as reservas com o UserID filtrando pelo número do quarto e/ou check-in, se não tiver filtro, ele traz todos as reservas dos query param, ver como fazer isso
+
+
+- Rota de cancelar reserva ADMIN
+	- cONTROLLER /{ID} Delete
+		- Pega id passado pela rota e retorna paar servisse se não der erro retorna o status 200
+	- Service
+		- Criar interface e implementar método em que Repasso o id para o repo
+	- Repor Tem que ser genérico
+		- Criar interface e implementar método em que após encontrar a reserva pelo id, eu excluo ele
+
+
+- Rota de visualizar todas as reservas Admin
+	- Controller 
+		- chama a servisse se não der erro retorna todas as reservas
+	- Service
+		- Criar interface e implementar método em que pego e retorno um array de reservas
+	- Repo Tem que ser genérico
+		- Criar interface e implementar método em que pego todas as reservas, ordenadas pela data de check-in
+
+- Criar middleware que registrará os dados de acordo com o model da tabela de log, ele chamará a servisse de log e se der erro não é para travar o sistema
+
+- Criar uma Interface e uma servisse de log, que chamará um repo de registrar log repassando os dados 
+
+- Criar uma Interface e um repo de log, que registrará o log na tabela de log  
+
+- Documentar os endpoint da API com descrições detalhadas, posso usar o xml
+	
+- Toda rota deve ser autenticada com JWT.  
+
+-TESTE
+	- Ver se ao criar um usuário ele salva a data de criação
+	- Ver se quando atualiza um dado se data de atualização é feita
+	- Ver o que acontece se eu mandar uma role que não existe
+	- Testar o refresh token se quando ele expira se ele da 401, pois o refresh token quando expira é para criar um novo jwt, com um novo refresh token
+	- Testar o jwt
+		- Quando expira
+			- Com o refrsh token expirado
+			- Com o refresh token não expirado
+		- Quando estpa errado
+		- Com as diferentes roles
+		- E seguindo o fluxo certo
+		- Ver se diferencia o token expirado para o token invalido
+	- Testar a criptografia
+	- Testar a validação da senha
+	- Testar a rota de cadastro por completa
+	- Testar a rota de login
+	- Testar se eu tentar cadastrar um e-mail repetido
+	- Testar se mandar o e-mail e senha errado
+	- Testar se eu deixar de passar algum dado nas rotas
+	- Testar ao gerar refresh token que não encontrou o user
+	- Testar se o middleware está registrando
+		- Forçar um erro para ver se isso trava o sistema
+
