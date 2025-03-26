@@ -1,8 +1,8 @@
-- Criar um model base que terá o id, E QUANDO FOI CRIADO OU ATUALIZADO 
+x Criar um model base que terá o id, E QUANDO FOI CRIADO OU ATUALIZADO 
 
-- Criar um model de enum para role que só poderá ser  User ou Admin
+x Criar um model de enum para role que só poderá ser  User ou Admin
 
-- Criar um model da tabela de user, que terá nome, senha, e-mail e role (que será do tipo role), refreshToken (Pode ser nulo), expiretdeRefreshToken(Pode ser nulo e Datetime) ele extende da model base
+- Criar um model da tabela de user, que terá nome, senha, e-mail e role (que será do tipo role), refreshToken (Pode ser nulo), expiretdeRefreshToken(Pode ser nulo e Datetime) ele extende da model base <!! ---- Estou nas data annotations ------------!!>>
 
 - Criar um model de request de user login que terá e-mail e senha
 
@@ -18,7 +18,7 @@
 
 - Intalar o EF
 
-- Criar a conexão com o bd e o contexto criando a tabela de user, logs e de reservas
+- Criar a conexão com o bd e o contexto criando a tabela de user, logs e de reservas e acrescentando a atualização automática do updatAt
 
 - Fazer o mapeamento da coluna de e-mail para ser única 
 
@@ -153,4 +153,5 @@
 	- Testar ao gerar refresh token que não encontrou o user
 	- Testar se o middleware está registrando
 		- Forçar um erro para ver se isso trava o sistema
+	- Tentar testar se passar Nome, Password, email e role sem dados para ver se retornar mensagem de required e o e-mail se não estiver formatado e testar o maxLenth
 
