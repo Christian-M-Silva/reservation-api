@@ -1,5 +1,4 @@
-﻿using ReservationApi.Models.DataBase;
-using ReservationApi.Models.Enuns;
+﻿using ReservationApi.Models.Enuns;
 using System.ComponentModel.DataAnnotations;
 
 namespace ReservationApi.Models.Entities

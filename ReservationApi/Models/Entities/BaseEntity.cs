@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ReservationApi.Models.DataBase
+namespace ReservationApi.Models.Entities
 {
     public class BaseEntity
     {
