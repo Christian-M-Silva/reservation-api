@@ -18,29 +18,27 @@ x Criar um model da tabela de log, em que será registrado o tipo de requisiçã
 
 x Intalar o EF
 
-- Criar a conexão com o bd e o contexto criando a tabela de user, logs e de reservas e acrescentando a atualização automática do updatAt
+x Criar a conexão com o bd e o contexto criando a tabela de user, logs e de reservas e acrescentando a atualização automática do updatAt
 
-- Fazer o mapeamento da coluna de e-mail para ser única 
+x Fazer o mapeamento da coluna de e-mail para ser única 
 
-- Criar as migrations
+x Instalar o JWT
 
-- Instalar o JWT
+x Configurar o JWT
+	x Essa service do JWT espera receber a role (do tipo role), e-mail e o ID do cliente
+	x Incluir nas clains do JWT as roles e o id do cliente
 
-- Configurar o JWT
-	- Essa service do JWT espera receber a role (do tipo role), e-mail e o ID do cliente
-	- Incluir nas clains do JWT as roles e o id do cliente
+x Criar na service um método de criptografar e validar senha, sendo que o de criptografar, retornar a senha criptografada e o validador, retorna um bool se a validação está certa
 
-- Criar na service um método de criptografar e validar senha, sendo que o de criptografar, retornar a senha criptografada e o validador, retorna um bool se a validação está certa
-
-- Rota de cadastro
-	- Controller Post
-		- Recebe Nome, Senha, role(Enum: User ou Admin), e-mail de acordo com o model de request de registrar user
-		- Fazer tratativa se a role for uma que não exista
-		- Se der algum erro retornar como erro interno 500
-		- Se der certo retornar um 201 com o e-mail e nome de usuário criado
-	- Service
-		- Criar uma Interface dessa service informando que existirá um método de cadastro que retornar um tipo model da tabela de user
-		- Chama a service que tem o método de criptografar a senha e passa para o repositor os dados recebidos no front com a senha criptografada
+x Rota de cadastro
+	x Controller Post
+		x Recebe Nome, Senha, role(Enum: User ou Admin), e-mail de acordo com o model de request de registrar user
+		x Fazer tratativa se a role for uma que não exista
+		x Se der algum erro retornar como erro interno 500
+		x Se der certo retornar um 201 com o e-mail e nome de usuário criado
+	x Service
+		x Criar uma Interface dessa service informando que existirá um método de cadastro que retornar um tipo model da tabela de user
+		- Implementar a service que tem o método de criptografar a senha e passa para o repositor os dados recebidos no front com a senha criptografada
 	- Repository
 		- Criar uma Interface desse repositor informando que existirá um método de cadastro, retornar um tipo model da tabela de user
 		- Salva no banco de dados de user os dados recebidos da service e retornar esse dado salvo
@@ -124,11 +122,15 @@ x Intalar o EF
 
 - Criar uma Interface e uma servisse de log, que chamará um repo de registrar log repassando os dados 
 
-- Criar uma Interface e um repo de log, que registrará o log na tabela de log  
+- Criar uma Interface e um repo de log, que registrará o log na tabela de log 
+
+- Ajeitar a injeção de dependencia 
 
 - Documentar os endpoint da API com descrições detalhadas, posso usar o xml
 	
 - Toda rota deve ser autenticada com JWT.  
+
+- Criar as migrations
 
 -TESTE
 	- Ver se ao criar um usuário ele salva a data de criação
