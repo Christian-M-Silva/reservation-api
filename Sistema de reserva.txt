@@ -2,21 +2,21 @@ x Criar um model base que terá o id, E QUANDO FOI CRIADO OU ATUALIZADO
 
 x Criar um model de enum para role que só poderá ser  User ou Admin
 
-- Criar um model da tabela de user, que terá nome, senha, e-mail e role (que será do tipo role), refreshToken (Pode ser nulo), expiretdeRefreshToken(Pode ser nulo e Datetime) ele extende da model base <!! ---- Estou nas data annotations ------------!!>>
+x Criar um model da tabela de user, que terá nome, senha, e-mail e role (que será do tipo role), refreshToken (Pode ser nulo), expiretdeRefreshToken(Pode ser nulo e Datetime) ele extende da model base
 
-- Criar um model de request de user login que terá e-mail e senha
+x Criar um model de request de user login que terá e-mail e senha
 
-- Criar um model de request de registrar user que herdará o request de user login e a terá a mais Nome, e o Enum de role
+x Criar um model de request de registrar user que herdará o request de user login e a terá a mais Nome, e o Enum de role
 
-- Criar um model de refreshToken que tem um refreshToken que é string e um DateTime que é a data de expiração
+x Criar um model de refreshToken que tem um refreshToken que é string e um DateTime que é a data de expiração
 
-- Criar model de Reserva  com Id que pode ser nulo, nome cliente que pode ser nulo, data de checkin e data de checkout, número do quarto, IdCliente
+x Criar model da tabela de Reserva  com Id que pode ser nulo, nome cliente que pode ser nulo, data de checkin e data de checkout, número do quarto, IdCliente
 
-- Criar model de requestFilter com DateTime para check-in e int para número do quarto lembrando que podem ser valores nulos
+x Criar model de requestFilter com DateTime para check-in e int para número do quarto lembrando que podem ser valores nulos
 
-- Criar um model da tabela de log, em que será registrado o tipo de requisição, a rota, o tempo 
+x Criar um model da tabela de log, em que será registrado o tipo de requisição, a rota, o tempo 
 
-- Intalar o EF
+x Intalar o EF
 
 - Criar a conexão com o bd e o contexto criando a tabela de user, logs e de reservas e acrescentando a atualização automática do updatAt
 

@@ -9,6 +9,6 @@ namespace ReservationApi.Models.Entities
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        public DateTime? UpdateAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }
