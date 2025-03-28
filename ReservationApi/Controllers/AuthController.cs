@@ -12,11 +12,11 @@ namespace ReservationApi.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IAuth AuthService) : ControllerBase
+    public class AuthController(IAuthService AuthService) : ControllerBase
     {
-        readonly IAuth _authService = AuthService;
+        readonly IAuthService _authService = AuthService;
         [HttpPost]
-        public async Task<ActionResult> Register(RegisterRequest registerRequest)
+        public async Task<ActionResult> Register(RegisterUserRequest registerRequest)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace ReservationApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        // GET: api/<AuthController>
+        /* GET: api/<AuthController>
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -55,6 +55,6 @@ namespace ReservationApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-        }
+        }*/
     }
 }

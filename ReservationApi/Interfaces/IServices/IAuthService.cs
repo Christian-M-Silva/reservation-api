@@ -3,8 +3,8 @@ using ReservationApi.Models.Request;
 
 namespace ReservationApi.Interfaces.IServices
 {
-    public interface IAuth
+    public interface IAuthService
     {
-        Task<UserEntity> RegisterAsync(RegisterRequest user);
+        Task<UserEntity> RegisterAsync(RegisterUserRequest user);
     }
 }
