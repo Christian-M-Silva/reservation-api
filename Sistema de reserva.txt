@@ -38,31 +38,33 @@ x Rota de cadastro
 		x Se der certo retornar um 201 com o e-mail e nome de usuário criado
 	x Service
 		x Criar uma Interface dessa service informando que existirá um método de cadastro que retornar um tipo model da tabela de user
-		- Implementar a service que tem o método de criptografar a senha e passa para o repositor os dados recebidos no front com a senha criptografada
-	- Repository
-		- Criar uma Interface desse repositor informando que existirá um método de cadastro, retornar um tipo model da tabela de user
-		- Salva no banco de dados de user os dados recebidos da service e retornar esse dado salvo
+		x Implementar a service que tem o método de criptografar a senha e passa para o repositor os dados recebidos no front com a senha criptografada
+	x Repository
+		x Criar uma Interface desse repositor informando que existirá um método de cadastro, retornar um tipo model da tabela de user
+		x Salva no banco de dados de user os dados recebidos da service e retornar esse dado salvo
 
-- Rota de login
-	- Controller post
-		- Esperar chegar os dados de model de request de user login
-		- Manda para a service o email e senha essa service retorna true ou false
-		- Se retornar false, retornar uma mensagem para o usuário informando que senha e e-mail errado com status code 403
-		- Se retornar true ele gera o token jwt
-		- Se der tudo certo na geração do JWT ele gera um refresh token, chamado a servisse e passando o e-mail se retornar null ele retorna um 403
-		- E retorna o JWT e o Refrsh Token com o status code 200
+x Rota de login
+	x Controller post
+		x Esperar chegar os dados de model de request de user login
+		x Manda para a service o email e senha essa service retorna userEntity
+		x Se retornar null, retornar uma mensagem para o usuário informando que senha e e-mail errado com status code 403
+		x Se retornar ele gera o token jwt com os dados retornados
+		x Se der tudo certo na geração do JWT ele gera um refresh token, chamado a servisse, passando o e-mail
+		x E retorna o JWT e o Refrsh Token com o status code 200
 	- Service
-		- Criar uma Interface dessa service que retorna true ou false e outro método nessa interface que gera um refresh token e retorna uma string de refreshToken
+		- Criar uma Interface dessa service que retorna user
+		- Criar na jwtService outro método nessa interface que gera um refresh token e retorna uma string de refreshToken
 		- O método que retornar true ou false
-			- Chama o método da repositor passando o e-mail e deve retornar a senha que está no bd
-			- Validar se retornou alguma coisa, se retornar null significa que esse user é errado ai retornar false para controller
+			- Chama o método da repositor passando o e-mail e deve retornar o userEntity que está no bd
+			- Validar se retornou alguma coisa, se retornar null significa que esse user é errado ai retornar null para controller
 			- Se o repositor retornr algum e-mail ele chama a service que tem o método de validar a senha passando a senha que o usuário passou e a senha criptografada recebida pelo banco e retornar para o controller o resultado boolean da validação
-		- O método do refresh token
-			- passa para o repor o e-mail e retorna o resultado
-			- Se retornar null repaço para controller
+				- Se retornar false, ai retornar null para o controller
+				- Se retornar true ai retorna o userEntity para o controller
+		- O método do refresh token na jwtService
+			- passa para o repor de AuthRepository o e-mail e retorna o resultado
 	- Reporsitorio
-		- Criar uma Interface desse repor que retornar uma string que é a senha e o método de refreshToken que retorna um refreshToken
-		- Pesquisar no bd pelo e-mail retornado a senha se encontrar o user, senão o null
+		- Criar uma Interface desse repor que retornar userEntity e o método de refreshToken que retorna um refreshToken
+		- Pesquisar no bd pelo e-mail retornado o userEntity se encontrar o user, senão o null
 		- O que retornar refresh token ele salva o rfresh token na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
 
 - Rota de refresh token 

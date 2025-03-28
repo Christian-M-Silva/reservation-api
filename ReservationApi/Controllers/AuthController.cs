@@ -11,10 +11,13 @@ namespace ReservationApi.Controllers
     
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController(IAuthService AuthService) : ControllerBase
+    public class AuthController(IAuthService authService, IJwtService jwtService) : ControllerBase
     {
-        private readonly IAuthService _authService = AuthService;
-        [HttpPost]
+        private readonly IAuthService _authService = authService;
+        private readonly IJwtService _jwtService = jwtService;
+
+
+        [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterUserRequest registerRequest)
         {
             try
@@ -30,6 +33,30 @@ namespace ReservationApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Login(LoginRequest loginRequest)
+        {
+            try
+            {
+               UserEntity user = await _authService.GetUser(loginRequest);
+
+                if (user == null)
+                {
+                    return StatusCode(403, new { mensagem = "Incorrect email or password." });
+                }
+
+                string jwt = _jwtService.GenerateToken(user.Role, user.Email, user.Id);
+                string refreshToken = _jwtService.GenerateRefreshToken(user.Email);
+
+                return Ok(new {jwt, refreshToken});
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
         /* GET: api/<AuthController>
         [HttpGet]
         public IEnumerable<string> Get()
