@@ -51,19 +51,19 @@ x Rota de login
 		x Se retornar ele gera o token jwt com os dados retornados
 		x Se der tudo certo na geração do JWT ele gera um refresh token, chamado a servisse, passando o e-mail
 		x E retorna o JWT e o Refrsh Token com o status code 200
-	- Service
-		- Criar uma Interface dessa service que retorna user
-		- Criar na jwtService outro método nessa interface que gera um refresh token e retorna uma string de refreshToken
-		- O método que retornar true ou false
-			- Chama o método da repositor passando o e-mail e deve retornar o userEntity que está no bd
-			- Validar se retornou alguma coisa, se retornar null significa que esse user é errado ai retornar null para controller
-			- Se o repositor retornr algum e-mail ele chama a service que tem o método de validar a senha passando a senha que o usuário passou e a senha criptografada recebida pelo banco e retornar para o controller o resultado boolean da validação
+	x Service
+		x Criar uma Interface dessa service que retorna user
+		x Criar na jwtService outro método nessa interface que gera um refresh token e retorna uma string de refreshToken
+		x O método que retornar user
+			x Chama o método da repositor passando o e-mail e deve retornar o userEntity que está no bd
+			x Validar se retornou alguma coisa, se retornar null significa que esse user é errado ai retornar null para controller
+			- Se o repositor retornr algum e-mail ele chama a service que tem o método de validar a senha passando a senha que o usuário passou e a senha criptografada recebida pelo banco e AI VALIDA
 				- Se retornar false, ai retornar null para o controller
 				- Se retornar true ai retorna o userEntity para o controller
 		- O método do refresh token na jwtService
 			- passa para o repor de AuthRepository o e-mail e retorna o resultado
 	- Reporsitorio
-		- Criar uma Interface desse repor que retornar userEntity e o método de refreshToken que retorna um refreshToken
+		- Criar uma Interface na AuthRepository e criar um repo dessa interface que retornar userEntity pegando pelo e-mail e o método de refreshToken que retorna um refreshToken
 		- Pesquisar no bd pelo e-mail retornado o userEntity se encontrar o user, senão o null
 		- O que retornar refresh token ele salva o rfresh token na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
 

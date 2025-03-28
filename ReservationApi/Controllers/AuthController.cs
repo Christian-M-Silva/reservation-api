@@ -39,7 +39,7 @@ namespace ReservationApi.Controllers
         {
             try
             {
-               UserEntity user = await _authService.GetUser(loginRequest);
+               UserEntity? user = await _authService.GetUser(loginRequest);
 
                 if (user == null)
                 {

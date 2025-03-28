@@ -5,9 +5,28 @@ using ReservationApi.Models.Request;
 
 namespace ReservationApi.Services
 {
-    public class AuthService(IBaseRepository<UserEntity> authRepository) : IAuthService
+    public class AuthService(IBaseRepository<UserEntity> baseRepository, IAuthRepository authRepository) : IAuthService
     {
-        private readonly IBaseRepository<UserEntity> _authRepository = authRepository;
+        private readonly IBaseRepository<UserEntity> _baseRepository = baseRepository;
+        private readonly IAuthRepository _authRepository = authRepository;
+
+        public async Task<UserEntity?> GetUser(LoginRequest loginRequest)
+        {
+            try
+            {
+                UserEntity userEntity = await _authRepository.GetUserByEmailAsync(loginRequest.Email);
+                if (userEntity == null)
+                {
+                    return userEntity;
+                }
+                bool isCorrectPassword = EncryptionService.VerifyPassword(loginRequest.Password, userEntity.Password);
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
+        }
+
         public async Task<UserEntity> RegisterAsync(RegisterUserRequest user)
         {
             try
@@ -20,7 +39,7 @@ namespace ReservationApi.Services
                     Email = user.Email,
                     Name = user.Name
                 };
-                return await _authRepository.InsertAsync(userEntity);
+                return await _baseRepository.InsertAsync(userEntity);
             }
             catch (Exception ex)
             {
