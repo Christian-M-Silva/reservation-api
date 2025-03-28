@@ -3,7 +3,6 @@ using ReservationApi.Interfaces.IServices;
 using ReservationApi.Models.Entities;
 using ReservationApi.Models.Enuns;
 using ReservationApi.Models.Request;
-using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,7 +13,7 @@ namespace ReservationApi.Controllers
     [ApiController]
     public class AuthController(IAuthService AuthService) : ControllerBase
     {
-        readonly IAuthService _authService = AuthService;
+        private readonly IAuthService _authService = AuthService;
         [HttpPost]
         public async Task<ActionResult> Register(RegisterUserRequest registerRequest)
         {

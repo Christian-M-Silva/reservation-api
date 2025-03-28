@@ -5,16 +5,22 @@ using ReservationApi.Models.Request;
 
 namespace ReservationApi.Services
 {
-    public class AuthService(IAuthRepository authRepository) : IAuthService
+    public class AuthService(IBaseRepository<UserEntity> authRepository) : IAuthService
     {
-        readonly IAuthRepository _authRepository = authRepository;
+        private readonly IBaseRepository<UserEntity> _authRepository = authRepository;
         public async Task<UserEntity> RegisterAsync(RegisterUserRequest user)
         {
             try
             {
                 string hashPassword = EncryptionService.HashPassword(user.Password);
-                user.Password = hashPassword;
-                return await _authRepository.RegisterAsync(user);
+                UserEntity userEntity = new()
+                {
+                    Role = user.Role,
+                    Password = hashPassword,
+                    Email = user.Email,
+                    Name = user.Name
+                };
+                return await _authRepository.InsertAsync(userEntity);
             }
             catch (Exception ex)
             {
