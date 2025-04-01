@@ -14,7 +14,7 @@ namespace ReservationApi.Services
         {
             try
             {
-                UserEntity userEntity = await _authRepository.GetUserByEmailAsync(loginRequest.Email);
+                UserEntity? userEntity = await _authRepository.GetUserByEmailAsync(loginRequest.Email);
                 if (userEntity == null)
                 {
                     return userEntity;
