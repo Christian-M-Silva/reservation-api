@@ -3,6 +3,7 @@ using ReservationApi.Interfaces.IServices;
 using ReservationApi.Models.Entities;
 using ReservationApi.Models.Enuns;
 using ReservationApi.Models.Request;
+using ReservationApi.Models.Shared;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -47,7 +48,7 @@ namespace ReservationApi.Controllers
                 }
 
                 string jwt = _jwtService.GenerateToken(user.Role, user.Email, user.Id);
-                string refreshToken = _jwtService.GenerateRefreshToken(user.Email);
+                RefreshTokenModel refreshToken = await _jwtService.GenerateRefreshToken(user.Email);
 
                 return Ok(new {jwt, refreshToken});
             }

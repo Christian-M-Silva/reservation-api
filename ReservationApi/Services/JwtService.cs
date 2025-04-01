@@ -1,9 +1,13 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using ReservationApi.Interfaces.IRepositories;
 using ReservationApi.Interfaces.IServices;
+using ReservationApi.Models.Entities;
 using ReservationApi.Models.Enuns;
+using ReservationApi.Models.Shared;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ReservationApi.Services
 {
@@ -13,9 +17,11 @@ namespace ReservationApi.Services
         private readonly string _issuer;
         private readonly string _audience;
         private readonly int _expirationMinutes;
+        private readonly IAuthRepository _authRepository;
 
-        public JwtService(IConfiguration configuration)
+        public JwtService(IConfiguration configuration, IAuthRepository authRepository)
         {
+            _authRepository = authRepository;
             var jwtSettings = configuration.GetSection("JwtSettings");
             _secretKey = jwtSettings["Key"] ?? string.Empty;
             _issuer = jwtSettings["Issuer"] ?? string.Empty;
@@ -23,9 +29,22 @@ namespace ReservationApi.Services
             _expirationMinutes = int.Parse(jwtSettings["ExpirationMinutes"] ?? "60");
         }
 
-        public string GenerateRefreshToken(string email)
+        public async Task<RefreshTokenModel> GenerateRefreshToken(string email)
         {
-            throw new NotImplementedException();
+            try
+            {
+                RefreshTokenModel refreshToken = await _authRepository.GenerateRefrsehToken(email);
+
+                if (refreshToken.RefreshToken == null)
+                {
+                    throw new Exception("Refresh token generation failed");
+                }
+                return refreshToken;
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
         }
 
         public string GenerateToken(RoleEnum role, string email, Guid idClient)

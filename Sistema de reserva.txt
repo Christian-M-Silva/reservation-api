@@ -49,23 +49,23 @@ x Rota de login
 		x Manda para a service o email e senha essa service retorna userEntity
 		x Se retornar null, retornar uma mensagem para o usuário informando que senha e e-mail errado com status code 403
 		x Se retornar ele gera o token jwt com os dados retornados
-		x Se der tudo certo na geração do JWT ele gera um refresh token, chamado a servisse, passando o e-mail
+		x Se der tudo certo na geração do JWT ele gera um refresh token, chamado a servisse, passando o e-mail e retornar o tipo RefreshTokenModel
 		x E retorna o JWT e o Refrsh Token com o status code 200
 	x Service
 		x Criar uma Interface dessa service que retorna user
-		x Criar na jwtService outro método nessa interface que gera um refresh token e retorna uma string de refreshToken
+		x Criar na jwtService outro método nessa interface que gera um refresh token e retornar o tipo RefreshTokenModel
 		x O método que retornar user
 			x Chama o método da repositor passando o e-mail e deve retornar o userEntity que está no bd
 			x Validar se retornou alguma coisa, se retornar null significa que esse user é errado ai retornar null para controller
-			- Se o repositor retornr algum e-mail ele chama a service que tem o método de validar a senha passando a senha que o usuário passou e a senha criptografada recebida pelo banco e AI VALIDA
-				- Se retornar false, ai retornar null para o controller
-				- Se retornar true ai retorna o userEntity para o controller
-		- O método do refresh token na jwtService
-			- passa para o repor de AuthRepository o e-mail e retorna o resultado
+			x Se o repositor retornr algum e-mail ele chama a service que tem o método de validar a senha passando a senha que o usuário passou e a senha criptografada recebida pelo banco e AI VALIDA
+				x Se retornar false, ai retornar null para o controller
+				x Se retornar true ai retorna o userEntity para o controller
+		x O método do refresh token na jwtService
+			x passa para o repor de AuthRepository o e-mail e retornar o tipo RefreshTokenModel
 	- Reporsitorio
 		- Criar uma Interface na AuthRepository e criar um repo dessa interface que retornar userEntity pegando pelo e-mail e o método de refreshToken que retorna um refreshToken
 		- Pesquisar no bd pelo e-mail retornado o userEntity se encontrar o user, senão o null
-		- O que retornar refresh token ele salva o rfresh token na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
+		- O que retornar refresh token ele salva o rfresh token que será feito por parâmetro e salva na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
 
 - Rota de refresh token 
 	- Controller put
