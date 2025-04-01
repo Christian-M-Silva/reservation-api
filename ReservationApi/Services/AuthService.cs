@@ -20,6 +20,10 @@ namespace ReservationApi.Services
                     return userEntity;
                 }
                 bool isCorrectPassword = EncryptionService.VerifyPassword(loginRequest.Password, userEntity.Password);
+
+                if (!isCorrectPassword) return null;
+
+                return userEntity;
             }
             catch (Exception err)
             {
