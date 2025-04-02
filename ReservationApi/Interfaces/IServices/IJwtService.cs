@@ -1,4 +1,5 @@
-﻿using ReservationApi.Models.Enuns;
+﻿using ReservationApi.Models.Entities;
+using ReservationApi.Models.Enuns;
 using ReservationApi.Models.Shared;
 
 namespace ReservationApi.Interfaces.IServices
@@ -7,5 +8,6 @@ namespace ReservationApi.Interfaces.IServices
     {
         string GenerateToken(RoleEnum role, string email, Guid idClient);
         Task<RefreshTokenModel> GenerateRefreshToken(string email);
+        Task<UserEntity> ValideRefreshToken(Guid id, string refreshToken);
     }
 }

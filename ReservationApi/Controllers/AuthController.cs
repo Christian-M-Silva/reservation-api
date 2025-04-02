@@ -40,7 +40,7 @@ namespace ReservationApi.Controllers
         {
             try
             {
-               UserEntity? user = await _authService.GetUser(loginRequest);
+               UserEntity? user = await _authService.GetUserAsync(loginRequest);
 
                 if (user == null)
                 {
@@ -58,12 +58,20 @@ namespace ReservationApi.Controllers
             }
         }
 
-        [HttpPut("refresh-token")]
-        public async Task<ActionResult> RefreshToken()
+        [HttpPut("refresh-token/{id}")]
+        public async Task<ActionResult> RefreshToken(Guid id, string refreshToken)
         {
             try
             {
-               
+               UserEntity user = await _jwtService.ValideRefreshToken(id, refreshToken);
+
+                if (user == null)
+                {
+                    return Unauthorized(new { message = "Invalid refresh token" });
+                }
+                string jwt = _jwtService.GenerateToken(user.Role, user.Email, user.Id);
+
+                return Ok(new { jwt });
             }
             catch (Exception ex)
             {

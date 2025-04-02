@@ -10,7 +10,7 @@ namespace ReservationApi.Services
         private readonly IBaseRepository<UserEntity> _baseRepository = baseRepository;
         private readonly IAuthRepository _authRepository = authRepository;
 
-        public async Task<UserEntity?> GetUser(LoginUserRequest loginRequest)
+        public async Task<UserEntity?> GetUserAsync(LoginUserRequest loginRequest)
         {
             try
             {

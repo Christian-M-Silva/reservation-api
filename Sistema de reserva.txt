@@ -67,21 +67,21 @@ x Rota de login
 		x Pesquisar no bd pelo e-mail retornado o userEntity se encontrar o user, senão o null
 		x O que retornar refresh token ele salva o rfresh token que será feito e salva na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
 
-- Rota de refresh token 
+x Rota de refresh token 
 	- Controller put
-		- Esperar receber uma string que é o refresh controller
+		- Esperar receber um Guid que é o id e a strng de refresh token
 		- Chama a servisse de validar se o token é valido e se existe, se retornar null ai retorno um 401
 		- Se após validar ele existir normal, ai eu só chamo o método de gerar JWT passando o Role do user e o e-mail recebido e o id e retorno o JWT se der tudo certo com o status 200
 	- Service
-		- Criar interface de validar se o refresh token é valido retornar um tipo de User
-		- O método de validar o refresh recebe o refresh token e passa para o repor o refreshToken enviado pelo user
+		- Criar interface de validar se o refresh token é valido passando o id e a strng de refresh token retornar um tipo de User
+		- O método de validar o refresh recebe o id e a strng de refresh token e passa para o repor
 			- O retorno do repor tem que valida, se retornar null então retono para controller um null
-			- Se retornar um refresh token, preciso validar se ele não expirou.
-				- se ele não expirou retorno para a controller o User
-				- Se ele expirou, chamo o repor de excluir refreshToken passando e-mail e depois retornou null
+			- Se retornar um refresh token, preciso validar se ele não expirou e se a strng de refresh token enviada pelo front bate e combina com a que eu trouxe do bd.
+				- se ele não expirou e os 2 token forem iguais ai eu retorno para a controller o User
+				- Se ele expirou, ou os 2 tokens forem diferentes ai chamo o repor de excluir refreshToken passando e-mail e depois retornou null
 	- Repor
-		- Interface e método de validar se o refresh token recebido existe, se existir vai retornar um tipo User
-		- Interface e método de excluir se o refresh token recebido onde vou procurar o refrsh token e excluir esse refresh token, não retorna nada ele é void
+		- Interface e método de validar se o refresh token recebido existe de acordo com o id recebido, se existir vai retornar um tipo User senão retornar null
+		- Interface e método de excluir se o refresh token recebido onde vou procurar o refrsh token pelo id e excluir esse refresh token, não retorna nada ele é void
 
 - Rota de de criar reserva acessada por USER
 	- Controller post /reservas
