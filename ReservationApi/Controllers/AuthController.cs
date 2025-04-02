@@ -36,7 +36,7 @@ namespace ReservationApi.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login(LoginRequest loginRequest)
+        public async Task<ActionResult> Login(LoginUserRequest loginRequest)
         {
             try
             {
@@ -51,6 +51,19 @@ namespace ReservationApi.Controllers
                 RefreshTokenModel refreshToken = await _jwtService.GenerateRefreshToken(user.Email);
 
                 return Ok(new {jwt, refreshToken});
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpPut("refresh-token")]
+        public async Task<ActionResult> RefreshToken()
+        {
+            try
+            {
+               
             }
             catch (Exception ex)
             {
