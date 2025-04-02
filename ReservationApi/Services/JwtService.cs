@@ -33,9 +33,9 @@ namespace ReservationApi.Services
         {
             try
             {
-                RefreshTokenModel refreshToken = await _authRepository.GenerateRefrsehToken(email);
+                RefreshTokenModel? refreshToken = await _authRepository.GenerateRefrsehToken(email);
 
-                if (refreshToken.RefreshToken == null)
+                if (refreshToken == null || refreshToken.RefreshToken == null)
                 {
                     throw new Exception("Refresh token generation failed");
                 }

@@ -62,10 +62,10 @@ x Rota de login
 				x Se retornar true ai retorna o userEntity para o controller
 		x O método do refresh token na jwtService
 			x passa para o repor de AuthRepository o e-mail e retornar o tipo RefreshTokenModel
-	- Reporsitorio
-		- Criar uma Interface na AuthRepository e criar um repo dessa interface que retornar userEntity pegando pelo e-mail e o método de refreshToken que retorna um refreshToken
-		- Pesquisar no bd pelo e-mail retornado o userEntity se encontrar o user, senão o null
-		- O que retornar refresh token ele salva o rfresh token que será feito por parâmetro e salva na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
+	x Reporsitorio
+		x Criar uma Interface na AuthRepository e criar um repo dessa interface que retornar userEntity pegando pelo e-mail e o método de refreshToken que retorna um refreshToken pegando pelo e-mail
+		x Pesquisar no bd pelo e-mail retornado o userEntity se encontrar o user, senão o null
+		x O que retornar refresh token ele salva o rfresh token que será feito e salva na tabela de user de acordo com o e-mail passado e cria um dateTime para a expiraçãp e retorna o refresh token
 
 - Rota de refresh token 
 	- Controller put
