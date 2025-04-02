@@ -81,5 +81,18 @@ namespace ReservationApi.Services
                 throw new Exception(err.Message);
             }
         }
+
+        public async Task<UserEntity?> ValideRefreshToken(Guid id, string refreshToken)
+        {
+            UserEntity? user = await _authRepository.ValidateGenericToken(id);
+            bool isExpiretedRefreshToken = new DateOnly() > user?.ExpirationDateRefreshToken;
+            bool isDifferentToken = refreshToken != user?.RefreshToken;
+            if (user == null || isDifferentToken || isExpiretedRefreshToken)
+            {
+                await _authRepository.DeleteRefrsehToken(id);
+                return null;
+            }
+            return user;
+        }
     }
 }
