@@ -17,6 +17,18 @@ namespace ReservationApi.Repositories
             _database = _context.Set<T>();
         }
 
+        public async Task<T?> GetByIdAsync(Guid id)
+        {
+            try
+            {
+                return await _database.FirstOrDefaultAsync(user => user.Id == id);
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
+        }
+
         public async Task<T> InsertAsync(T entity)
         {
             try

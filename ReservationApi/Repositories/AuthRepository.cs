@@ -9,6 +9,12 @@ namespace ReservationApi.Repositories
     public class AuthRepository(MyDbContext dbContext) : IAuthRepository
     {
         private readonly MyDbContext _dbContext = dbContext;
+
+        public Task DeleteRefrsehToken(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<RefreshTokenModel?> GenerateRefrsehToken(string email)
         {
             try

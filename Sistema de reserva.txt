@@ -77,10 +77,10 @@ x Rota de refresh token
 		x O método de validar o refresh recebe o id e a strng de refresh token e passa para o repor
 		x O retorno do repor tem que valida, se retornar null então retono para controller um null
 		x Se retornar um refresh token, preciso validar se ele não expirou e se a strng de refresh token enviada pelo front bate e combina com a que eu trouxe do bd.
-			- se ele não expirou e os 2 token forem iguais ai eu retorno para a controller o User
-			- Se ele expirou, ou os 2 tokens forem diferentes ai chamo o repor de excluir refreshToken passando e-mail e depois retornou null
-	- Repor
-		- Interface e método de validar se o refresh token recebido existe de acordo com o id recebido, se existir vai retornar um tipo User senão retornar null
+			x se ele não expirou e os 2 token forem iguais ai eu retorno para a controller o User
+			x Se ele expirou, ou os 2 tokens forem diferentes ai chamo o repor de excluir refreshToken passando e-mail e depois retornou null
+	x Repor
+		- Interface e método de pegar entidade de acordo com o id recebido, se existir vai retornar um tipo User senão retornar null, posso fazer no baseRepository
 		- Interface e método de excluir se o refresh token recebido onde vou procurar o refrsh token pelo id e excluir esse refresh token, não retorna nada ele é void
 
 - Rota de de criar reserva acessada por USER

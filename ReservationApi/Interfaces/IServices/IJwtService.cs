@@ -8,6 +8,6 @@ namespace ReservationApi.Interfaces.IServices
     {
         string GenerateToken(RoleEnum role, string email, Guid idClient);
         Task<RefreshTokenModel> GenerateRefreshToken(string email);
-        Task<UserEntity?> ValideRefreshToken(Guid id, string refreshToken);
+        Task<UserEntity?> ValidateRefreshToken(Guid id, string refreshToken);
     }
 }

@@ -63,7 +63,7 @@ namespace ReservationApi.Controllers
         {
             try
             {
-               UserEntity? user = await _jwtService.ValideRefreshToken(id, refreshToken);
+               UserEntity? user = await _jwtService.ValidateRefreshToken(id, refreshToken);
 
                 if (user == null)
                 {

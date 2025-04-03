@@ -18,9 +18,11 @@ namespace ReservationApi.Services
         private readonly string _audience;
         private readonly int _expirationMinutes;
         private readonly IAuthRepository _authRepository;
+        private readonly IBaseRepository<UserEntity> _baseUserRepository;
 
-        public JwtService(IConfiguration configuration, IAuthRepository authRepository)
+        public JwtService(IConfiguration configuration, IAuthRepository authRepository, IBaseRepository<UserEntity> baseUserRepository)
         {
+            _baseUserRepository = baseUserRepository;
             _authRepository = authRepository;
             var jwtSettings = configuration.GetSection("JwtSettings");
             _secretKey = jwtSettings["Key"] ?? string.Empty;
@@ -82,9 +84,9 @@ namespace ReservationApi.Services
             }
         }
 
-        public async Task<UserEntity?> ValideRefreshToken(Guid id, string refreshToken)
+        public async Task<UserEntity?> ValidateRefreshToken(Guid id, string refreshToken)
         {
-            UserEntity? user = await _authRepository.ValidateGenericToken(id);
+            UserEntity? user = await _baseUserRepository.GetByIdAsync(id);
             bool isExpiretedRefreshToken = new DateOnly() > user?.ExpirationDateRefreshToken;
             bool isDifferentToken = refreshToken != user?.RefreshToken;
             if (user == null || isDifferentToken || isExpiretedRefreshToken)
