@@ -10,9 +10,24 @@ namespace ReservationApi.Repositories
     {
         private readonly MyDbContext _dbContext = dbContext;
 
-        public Task DeleteRefrsehToken(Guid id)
+        public async Task DeleteRefrsehToken(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                UserEntity user = await _dbContext.Users.FirstAsync(x => x.Id == id);
+                user.RefreshToken = null;
+                user.ExpirationDateRefreshToken = null;
+
+                _dbContext.Entry(user).Property(u => u.RefreshToken).IsModified = true;
+                _dbContext.Entry(user).Property(u => u.ExpirationDateRefreshToken).IsModified = true;
+
+
+                await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
         }
 
         public async Task<RefreshTokenModel?> GenerateRefrsehToken(string email)

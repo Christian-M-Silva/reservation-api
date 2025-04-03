@@ -24,6 +24,6 @@ namespace ReservationApi.Models.Entities
 
         public string? RefreshToken { get; set; }
 
-        public DateOnly ExpirationDateRefreshToken { get; set; }
+        public DateOnly? ExpirationDateRefreshToken { get; set; }
     }
 }

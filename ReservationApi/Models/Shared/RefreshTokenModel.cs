@@ -3,6 +3,6 @@
     public class RefreshTokenModel
     {
         public string RefreshToken { get; set; } = string.Empty;
-        public DateOnly ExpirationDateRefreshToken { get; set; }
+        public DateOnly? ExpirationDateRefreshToken { get; set; }
     }
 }

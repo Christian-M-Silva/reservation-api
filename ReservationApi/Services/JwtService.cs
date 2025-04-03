@@ -86,15 +86,23 @@ namespace ReservationApi.Services
 
         public async Task<UserEntity?> ValidateRefreshToken(Guid id, string refreshToken)
         {
-            UserEntity? user = await _baseUserRepository.GetByIdAsync(id);
-            bool isExpiretedRefreshToken = new DateOnly() > user?.ExpirationDateRefreshToken;
-            bool isDifferentToken = refreshToken != user?.RefreshToken;
-            if (user == null || isDifferentToken || isExpiretedRefreshToken)
+            try
             {
-                await _authRepository.DeleteRefrsehToken(id);
-                return null;
+                UserEntity? user = await _baseUserRepository.GetByIdAsync(id);
+                bool isExpiretedRefreshToken = new DateOnly() > user?.ExpirationDateRefreshToken;
+                bool isDifferentToken = refreshToken != user?.RefreshToken;
+                if (user == null) throw new Exception("Nonexistent user");
+                if (isDifferentToken || isExpiretedRefreshToken)
+                {
+                    await _authRepository.DeleteRefrsehToken(id);
+                    return null;
+                }
+                return user;
             }
-            return user;
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
         }
     }
 }

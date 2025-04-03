@@ -80,7 +80,7 @@ x Rota de refresh token
 			x se ele não expirou e os 2 token forem iguais ai eu retorno para a controller o User
 			x Se ele expirou, ou os 2 tokens forem diferentes ai chamo o repor de excluir refreshToken passando e-mail e depois retornou null
 	x Repor
-		- Interface e método de pegar entidade de acordo com o id recebido, se existir vai retornar um tipo User senão retornar null, posso fazer no baseRepository
+		x Interface e método de pegar entidade de acordo com o id recebido, se existir vai retornar um tipo User senão retornar null, posso fazer no baseRepository
 		- Interface e método de excluir se o refresh token recebido onde vou procurar o refrsh token pelo id e excluir esse refresh token, não retorna nada ele é void
 
 - Rota de de criar reserva acessada por USER
