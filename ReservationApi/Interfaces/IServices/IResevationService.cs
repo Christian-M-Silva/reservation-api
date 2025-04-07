@@ -4,6 +4,6 @@ namespace ReservationApi.Interfaces.IServices
 {
     public interface IResevationService
     {
-        public Task<ReservationEntity> CreateReservation(ReservationEntity entity);
+        public Task<ReservationEntity> CreateReservation(ReservationEntity reservation);
     }
 }

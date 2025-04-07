@@ -34,6 +34,8 @@ namespace ReservationApi.Controllers
                 reservation.ClientId = clientId;
 
                 ReservationEntity reservationEntity = await _reservationService.CreateReservation(reservation);
+
+                return Ok(reservationEntity);
             }
             catch (Exception ex)
             {
