@@ -81,11 +81,11 @@ x Rota de refresh token
 			x Se ele expirou, ou os 2 tokens forem diferentes ai chamo o repor de excluir refreshToken passando e-mail e depois retornou null
 	x Repor
 		x Interface e método de pegar entidade de acordo com o id recebido, se existir vai retornar um tipo User senão retornar null, posso fazer no baseRepository
-		- Interface e método de excluir se o refresh token recebido onde vou procurar o refrsh token pelo id e excluir esse refresh token, não retorna nada ele é void
+		x Interface e método de excluir se o refresh token recebido onde vou procurar o refrsh token pelo id e excluir esse refresh token, não retorna nada ele é void
 
-- Rota de de criar reserva acessada por USER
-	- Controller post /reservas
-		- Chame a servisse passando os dados que vieram do front, e o nome, id e e-mail vão vim do token de quem está usando, essa controller espera receber os dados do tipo Reserva
+x Rota de de criar reserva acessada por USER
+	x Controller post /reservas
+		x Chame a servisse passando os dados que vieram do front, e o nome, id, vão vim do token de quem está usando, essa controller espera receber os dados do tipo Reserva, tenho que ver como pegar as clains dos users
 		- Se deu tudo certo retorna 201 e a reserva criada, do contraio retonar um status de erro
 	- Service
 		- Criar interface e método que passe os dados recebidos da controller e retornem o tipo reservas
@@ -158,4 +158,5 @@ x Rota de refresh token
 	- Testar se o middleware está registrando
 		- Forçar um erro para ver se isso trava o sistema
 	- Tentar testar se passar Nome, Password, email e role sem dados para ver se retornar mensagem de required e o e-mail se não estiver formatado e testar o maxLenth
+	- Testar no  se estou conseguindo cruar com o name e o clientId
 

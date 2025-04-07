@@ -6,7 +6,7 @@ namespace ReservationApi.Interfaces.IServices
 {
     public interface IJwtService
     {
-        string GenerateToken(RoleEnum role, string email, Guid idClient);
+        string GenerateToken(RoleEnum role, string name, Guid idClient);
         Task<RefreshTokenModel> GenerateRefreshToken(string email);
         Task<UserEntity?> ValidateRefreshToken(Guid id, string refreshToken);
     }

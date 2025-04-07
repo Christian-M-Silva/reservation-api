@@ -47,7 +47,7 @@ namespace ReservationApi.Controllers
                     return StatusCode(403, new { mensagem = "Incorrect email or password." });
                 }
 
-                string jwt = _jwtService.GenerateToken(user.Role, user.Email, user.Id);
+                string jwt = _jwtService.GenerateToken(user.Role, user.Name, user.Id);
                 RefreshTokenModel refreshToken = await _jwtService.GenerateRefreshToken(user.Email);
 
                 return Ok(new {jwt, refreshToken});
@@ -69,7 +69,7 @@ namespace ReservationApi.Controllers
                 {
                     return Unauthorized(new { message = "Invalid refresh token" });
                 }
-                string jwt = _jwtService.GenerateToken(user.Role, user.Email, user.Id);
+                string jwt = _jwtService.GenerateToken(user.Role, user.Name, user.Id);
 
                 return Ok(new { jwt });
             }
@@ -78,31 +78,5 @@ namespace ReservationApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-
-        /* GET: api/<AuthController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<AuthController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // PUT api/<AuthController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<AuthController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }*/
     }
 }

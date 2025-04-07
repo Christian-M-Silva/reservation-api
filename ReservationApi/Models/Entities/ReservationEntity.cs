@@ -18,6 +18,6 @@ namespace ReservationApi.Models.Entities
         public int RoomNumber { get; set; }
 
         [Required(ErrorMessage = "Client id is required")]
-        public Guid ClientId { get; set; }
+        public String ClientId { get; set; } = string.Empty;
     }
 }

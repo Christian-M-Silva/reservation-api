@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ReservationApi.Services
 {
-    public class JwtService:IJwtService
+    public class JwtService : IJwtService
     {
         private readonly string _secretKey;
         private readonly string _issuer;
@@ -49,7 +49,7 @@ namespace ReservationApi.Services
             }
         }
 
-        public string GenerateToken(RoleEnum role, string email, Guid idClient)
+        public string GenerateToken(RoleEnum role, string name, Guid idClient)
         {
             try
             {
@@ -58,19 +58,18 @@ namespace ReservationApi.Services
 
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    Subject = new ClaimsIdentity(
-                    [
-                    new Claim(ClaimTypes.Email, email),
-                new Claim(ClaimTypes.NameIdentifier, idClient.ToString()),
-                new Claim(ClaimTypes.Role, role.ToString())
-                ]),
+                    Subject = new ClaimsIdentity([
+                        new Claim(ClaimTypes.Name, name),
+                        new Claim(ClaimTypes.NameIdentifier, idClient.ToString()),
+                        new Claim(ClaimTypes.Role, role.ToString())
+                    ]),
                     Expires = DateTime.UtcNow.AddMinutes(_expirationMinutes),
                     Issuer = _issuer,
                     Audience = _audience,
                     SigningCredentials = new SigningCredentials(
-                        new SymmetricSecurityKey(key),
-                        SecurityAlgorithms.HmacSha256Signature
-                    )
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature
+                )
                 };
 
                 var token = tokenHandler.CreateToken(tokenDescriptor);
