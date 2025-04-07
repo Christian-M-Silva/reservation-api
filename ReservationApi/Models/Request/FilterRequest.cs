@@ -4,5 +4,6 @@
     {
         public DateOnly? CheckIn { get; set; }
         public int? RoomNumber { get; set; }
+        public string? IdClient { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ReservationApi.Interfaces.IRepositories;
 using ReservationApi.Interfaces.IServices;
 using ReservationApi.Models.Entities;
+using ReservationApi.Models.Request;
 
 namespace ReservationApi.Services
 {
@@ -18,6 +19,11 @@ namespace ReservationApi.Services
             {
                 throw new Exception(err.Message);
             }
+        }
+
+        public Task<IEnumerable<ReservationEntity>> GetReservations(FilterRequest filterRequest)
+        {
+            throw new NotImplementedException();
         }
     }
 }

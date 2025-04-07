@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ReservationApi.Interfaces.IServices;
 using ReservationApi.Models.Entities;
+using ReservationApi.Models.Request;
 using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -42,37 +43,20 @@ namespace ReservationApi.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
-        /*
-        // GET: api/<ReservationsController>
+
+        [Authorize(Roles = "User")]
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult> GetReservations(FilterRequest filterRequest)
         {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET api/<ReservationsController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+            try
+            {
 
-        // POST api/<ReservationsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
-
-        // PUT api/<ReservationsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ReservationsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }*/
     }
 }
