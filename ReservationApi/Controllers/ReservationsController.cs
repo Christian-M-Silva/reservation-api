@@ -51,7 +51,12 @@ namespace ReservationApi.Controllers
 
             try
             {
+                var claims = HttpContext.User.Claims;
+                var clientId = claims.FirstOrDefault(c => c.Type == "NameIdentifier")?.Value;
+                filterRequest.IdClient = clientId;
+                IEnumerable<ReservationEntity?>  reservation = await _reservationService.GetReservations(filterRequest);
 
+                return Ok(reservation);
             }
             catch (Exception ex)
             {
