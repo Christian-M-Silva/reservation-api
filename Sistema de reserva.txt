@@ -86,20 +86,20 @@ x Rota de refresh token
 x Rota de de criar reserva acessada por USER
 	x Controller post /reservas
 		x Chame a servisse passando os dados que vieram do front, e o nome, id, vão vim do token de quem está usando, essa controller espera receber os dados do tipo Reserva, tenho que ver como pegar as clains dos users
-		- Se deu tudo certo retorna 201 e a reserva criada, do contraio retonar um status de erro
-	- Service
-		- Criar interface e método que passe os dados recebidos da controller e retornem o tipo reservas
-	- Repo Tem que ser genérico
-		- Criar interface e método que salve os dados recebidos da servisse e cria os dados necessarios e retornem o tipo reservas
+		x Se deu tudo certo retorna 201 e a reserva criada, do contraio retonar um status de erro
+	x Service
+		x Criar interface e método que passe os dados recebidos da controller e retornem o tipo reservas
+	x Repo Tem que ser genérico
+		x Criar interface e método que salve os dados recebidos da servisse e cria os dados necessarios e retornem o tipo reservas
 
 
-- Rota de de VISUALIZAR UMAs determinadas reservas que é a própria acessada por USER
-	- Controller get (rota), ele terá queryParam de filtro, em que poderá ser pesquisado data de checkin e numero do quarto o tipo requestFilter
-		- passa para a service a data de check-in se tiver, npumero do quarto, se tiver e o id do user que está no JWT esse é o unico obrigatorio a ser passado
-		- Ai se não der nenhum erro, só retorno as reservas
-	- Service
-		- Criar interface e implementar método em que Repasso os dados para o repo
-	- Repo Tem que ser genérico
+x Rota de de VISUALIZAR UMAs determinadas reservas que é a própria acessada por USER
+	x Controller get (rota), ele terá queryParam de filtro, em que poderá ser pesquisado data de checkin e numero do quarto o tipo requestFilter
+		x passa para a service a data de check-in se tiver, npumero do quarto, se tiver e o id do user que está no JWT esse é o unico obrigatorio a ser passado
+		x Ai se não der nenhum erro, só retorno as reservas
+	X Service
+		X Criar interface e implementar método em que Repasso os dados para o repo
+	x Repo 
 		- Criar interface e implementar método em que analiso se existe algum dado passado pelo query params para filtrar se sim ele retornar as reservas com o UserID filtrando pelo número do quarto e/ou check-in, se não tiver filtro, ele traz todos as reservas dos query param, ver como fazer isso
 
 
@@ -159,4 +159,5 @@ x Rota de de criar reserva acessada por USER
 		- Forçar um erro para ver se isso trava o sistema
 	- Tentar testar se passar Nome, Password, email e role sem dados para ver se retornar mensagem de required e o e-mail se não estiver formatado e testar o maxLenth
 	- Testar no  se estou conseguindo cruar com o name e o clientId
+	- Testar se eu não passar o CheckIn e/ou RoomNumber na rota de pegar reservas
 
