@@ -100,7 +100,7 @@ x Rota de de VISUALIZAR UMAs determinadas reservas que é a própria acessada po
 	X Service
 		X Criar interface e implementar método em que Repasso os dados para o repo
 	x Repo 
-		- Criar interface e implementar método em que analiso se existe algum dado passado pelo query params para filtrar se sim ele retornar as reservas com o UserID filtrando pelo número do quarto e/ou check-in, se não tiver filtro, ele traz todos as reservas dos query param, ver como fazer isso
+		x Criar interface e implementar método em que analiso se existe algum dado passado pelo query params para filtrar se sim ele retornar as reservas com o UserID filtrando pelo número do quarto e/ou check-in, se não tiver filtro, ele traz todos as reservas dos query param, ver como fazer isso
 
 
 - Rota de cancelar reserva ADMIN
@@ -108,8 +108,9 @@ x Rota de de VISUALIZAR UMAs determinadas reservas que é a própria acessada po
 		- Pega id passado pela rota e retorna paar servisse se não der erro retorna o status 200
 	- Service
 		- Criar interface e implementar método em que Repasso o id para o repo
-	- Repor Tem que ser genérico
-		- Criar interface e implementar método em que após encontrar a reserva pelo id, eu excluo ele
+	- Repor Tem que ser genérico (Já fiz)
+		- Criar interface e implementar método em que após encontrar a reserva pelo id, eu excluo ele (Já fiz)
+
 
 
 - Rota de visualizar todas as reservas Admin

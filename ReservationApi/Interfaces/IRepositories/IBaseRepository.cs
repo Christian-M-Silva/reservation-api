@@ -6,5 +6,6 @@ namespace ReservationApi.Interfaces.IRepositories
     {
         Task<T> InsertAsync(T entity);
         Task<T?> GetByIdAsync(Guid id);
+        Task DeleteByIdAsync(Guid id);
     }
 }

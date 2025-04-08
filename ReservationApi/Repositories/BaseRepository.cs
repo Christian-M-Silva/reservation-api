@@ -17,11 +17,29 @@ namespace ReservationApi.Repositories
             _database = _context.Set<T>();
         }
 
+        public async Task DeleteByIdAsync(Guid id)
+        {
+            try
+            {
+                 T? data = await _database.FirstOrDefaultAsync(entity => entity.Id == id);
+
+                if (data != null) 
+                { 
+                    _database.Remove(data);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
+        }
+
         public async Task<T?> GetByIdAsync(Guid id)
         {
             try
             {
-                return await _database.FirstOrDefaultAsync(user => user.Id == id);
+                return await _database.FirstOrDefaultAsync(entity => entity.Id == id);
             }
             catch (Exception err)
             {
