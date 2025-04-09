@@ -2,7 +2,7 @@
 
 namespace ReservationApi.Models.Entities
 {
-    public class LogEntity
+    public class LogEntity : BaseEntity
     {
         [Required(ErrorMessage = "Request type is required")]
         public string RequestType { get; set; } = string.Empty;
