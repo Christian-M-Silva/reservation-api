@@ -118,8 +118,8 @@ x Rota de cancelar reserva ADMIN
 		- chama a servisse se não der erro retorna todas as reservas
 	- Service
 		- Criar interface e implementar método em que pego e retorno um array de reservas
-	- Repo Tem que ser genérico
-		- Criar interface e implementar método em que pego todas as reservas, ordenadas pela data de check-in
+	x Repo
+		x Reaproveitar da interface e método GetReservations em que pego todas as reservas, ordenadas pela data de check-in
 
 - Criar middleware que registrará os dados de acordo com o model da tabela de log, ele chamará a servisse de log e se der erro não é para travar o sistema
 
@@ -161,4 +161,5 @@ x Rota de cancelar reserva ADMIN
 	- Tentar testar se passar Nome, Password, email e role sem dados para ver se retornar mensagem de required e o e-mail se não estiver formatado e testar o maxLenth
 	- Testar no  se estou conseguindo cruar com o name e o clientId
 	- Testar se eu não passar o CheckIn e/ou RoomNumber na rota de pegar reservas
+	- Testar se ao trazer as reservas eu retorno com a coluna de check-in ordenadar
 

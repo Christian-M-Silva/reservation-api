@@ -25,7 +25,7 @@ namespace ReservationApi.Repositories
                     query = query.Where(coluna => coluna.RoomNumber == filterRequest.RoomNumber);
                 }
 
-                return await query.ToListAsync();
+                return await query.OrderBy(coluna => coluna.CheckIn).ToListAsync();
             }
             catch (Exception err)
             {
