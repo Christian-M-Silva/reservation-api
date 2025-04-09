@@ -7,6 +7,6 @@ namespace ReservationApi.Interfaces.IServices
     {
         public Task<ReservationEntity> CreateReservation(ReservationEntity reservation);
         public Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest filterRequest);
-
+        public Task DeleteReservation(Guid id);
     }
 }

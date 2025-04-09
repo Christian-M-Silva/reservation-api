@@ -24,6 +24,18 @@ namespace ReservationApi.Services
             }
         }
 
+        public async Task DeleteReservation(Guid id)
+        {
+            try
+            {
+                await _baseRepository.DeleteByIdAsync(id);
+            }
+            catch (Exception err)
+            {
+                throw new Exception(err.Message);
+            }
+        }
+
         public async Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest filterRequest)
         {
             try
