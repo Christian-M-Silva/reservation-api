@@ -162,4 +162,7 @@ x Rota de cancelar reserva ADMIN
 	- Testar no  se estou conseguindo cruar com o name e o clientId
 	- Testar se eu não passar o CheckIn e/ou RoomNumber na rota de pegar reservas
 	- Testar se ao trazer as reservas eu retorno com a coluna de check-in ordenadar
+	- Testar no GetReservations onde a 
+		- regra ou role de user não precisa passar as querys porem retorna somente os dados do id dele sem filtro e com filtro somente os dados ele
+		- regra ou role de Admin texto com e sem filtro sendo que ele retorna o dado de todos
 

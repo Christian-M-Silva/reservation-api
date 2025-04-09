@@ -44,16 +44,22 @@ namespace ReservationApi.Controllers
             }
         }
 
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("/search")]
-        public async Task<ActionResult> GetReservations(FilterRequest filterRequest)
+        public async Task<ActionResult> GetReservations([FromQuery] FilterRequest filterRequest)
         {
 
             try
             {
                 var claims = HttpContext.User.Claims;
-                var clientId = claims.FirstOrDefault(c => c.Type == "NameIdentifier")?.Value;
-                filterRequest.IdClient = clientId;
+                var role = claims.FirstOrDefault(c => c.Type == "Role")?.Value;
+
+                if (role == "User")
+                {
+                    var clientId = claims.FirstOrDefault(c => c.Type == "NameIdentifier")?.Value;
+                    filterRequest.IdClient = clientId;
+                }
+
                 IEnumerable<ReservationEntity?> reservation = await _reservationService.GetReservations(filterRequest);
 
                 return Ok(reservation);
