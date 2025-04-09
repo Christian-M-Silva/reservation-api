@@ -36,7 +36,7 @@ namespace ReservationApi.Services
             }
         }
 
-        public async Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest filterRequest)
+        public async Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest? filterRequest)
         {
             try
             {

@@ -116,8 +116,8 @@ x Rota de cancelar reserva ADMIN
 - Rota de visualizar todas as reservas Admin
 	- Controller 
 		- chama a servisse se não der erro retorna todas as reservas
-	- Service
-		- Criar interface e implementar método em que pego e retorno um array de reservas
+	x Service
+		x Reaproveitar da interface e método GetReservations em que pego e retorno um array de reservas
 	x Repo
 		x Reaproveitar da interface e método GetReservations em que pego todas as reservas, ordenadas pela data de check-in
 

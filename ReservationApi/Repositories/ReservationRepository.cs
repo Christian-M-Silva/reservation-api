@@ -10,19 +10,24 @@ namespace ReservationApi.Repositories
     {
         private readonly MyDbContext _dbContext = dbContext;
 
-        public async Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest filterRequest)
+        public async Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest? filterRequest)
         {
             try
             {
-                var query = _dbContext.Reservations.Where(coluna => coluna.ClientId == filterRequest.IdClient);
+                var query = _dbContext.Reservations.AsQueryable();
 
-                if (filterRequest.CheckIn.HasValue)
+                if (filterRequest != null)
                 {
-                    query = query.Where(coluna => coluna.CheckIn == filterRequest.CheckIn);
-                }
-                if (filterRequest.RoomNumber.HasValue)
-                {
-                    query = query.Where(coluna => coluna.RoomNumber == filterRequest.RoomNumber);
+                    query = query.Where(coluna => coluna.ClientId == filterRequest.IdClient);
+
+                    if (filterRequest.CheckIn.HasValue)
+                    {
+                        query = query.Where(coluna => coluna.CheckIn == filterRequest.CheckIn);
+                    }
+                    if (filterRequest.RoomNumber.HasValue)
+                    {
+                        query = query.Where(coluna => coluna.RoomNumber == filterRequest.RoomNumber);
+                    }
                 }
 
                 return await query.OrderBy(coluna => coluna.CheckIn).ToListAsync();

@@ -5,6 +5,6 @@ namespace ReservationApi.Interfaces.IRepositories
 {
     public interface IReservationRepository
     {
-        public Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest filterRequest);
+        public Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest? filterRequest);
     }
 }
