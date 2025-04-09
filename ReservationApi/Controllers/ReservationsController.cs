@@ -45,7 +45,7 @@ namespace ReservationApi.Controllers
         }
 
         [Authorize(Roles = "User")]
-        [HttpGet]
+        [HttpGet("/search")]
         public async Task<ActionResult> GetReservations(FilterRequest filterRequest)
         {
 
@@ -54,9 +54,25 @@ namespace ReservationApi.Controllers
                 var claims = HttpContext.User.Claims;
                 var clientId = claims.FirstOrDefault(c => c.Type == "NameIdentifier")?.Value;
                 filterRequest.IdClient = clientId;
-                IEnumerable<ReservationEntity?>  reservation = await _reservationService.GetReservations(filterRequest);
+                IEnumerable<ReservationEntity?> reservation = await _reservationService.GetReservations(filterRequest);
 
                 return Ok(reservation);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("/{id}")]
+        public async Task<ActionResult> DeleteReservation(Guid id)
+        {
+            try
+            {
+                await _reservationService.DeleteReservation(id);
+
+                return Ok("Reserva deletada com sucesso");
             }
             catch (Exception ex)
             {

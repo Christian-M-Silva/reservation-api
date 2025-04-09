@@ -103,13 +103,13 @@ x Rota de de VISUALIZAR UMAs determinadas reservas que é a própria acessada po
 		x Criar interface e implementar método em que analiso se existe algum dado passado pelo query params para filtrar se sim ele retornar as reservas com o UserID filtrando pelo número do quarto e/ou check-in, se não tiver filtro, ele traz todos as reservas dos query param, ver como fazer isso
 
 
-- Rota de cancelar reserva ADMIN
-	- cONTROLLER /{ID} Delete
-		- Pega id passado pela rota e retorna paar servisse se não der erro retorna o status 200
-	- Service
-		- Criar interface e implementar método em que Repasso o id para o repo
-	- Repor Tem que ser genérico (Já fiz)
-		- Criar interface e implementar método em que após encontrar a reserva pelo id, eu excluo ele (Já fiz)
+x Rota de cancelar reserva ADMIN
+	x cONTROLLER /{ID} Delete
+		x Pega id passado pela rota e retorna paar servisse se não der erro retorna o status 200
+	x Service
+		x Criar interface e implementar método em que Repasso o id para o repo
+	x Repor Tem que ser genérico (Já fiz)
+		x Criar interface e implementar método em que após encontrar a reserva pelo id, eu excluo ele (Já fiz)
 
 
 
