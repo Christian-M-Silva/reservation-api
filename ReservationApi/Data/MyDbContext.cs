@@ -23,7 +23,7 @@ namespace ReservationApi.Data
             {
                 if (entry.State == EntityState.Modified)
                 {
-                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                    entry.Entity.UpdatedAt = DateTime.Now;
                 }
             }
 

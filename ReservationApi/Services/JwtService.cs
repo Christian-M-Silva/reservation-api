@@ -25,7 +25,7 @@ namespace ReservationApi.Services
             _baseUserRepository = baseUserRepository;
             _authRepository = authRepository;
             var jwtSettings = configuration.GetSection("JwtSettings");
-            _secretKey = jwtSettings["Key"] ?? string.Empty;
+            _secretKey = jwtSettings["SecretKey"] ?? string.Empty;
             _issuer = jwtSettings["Issuer"] ?? string.Empty;
             _audience = jwtSettings["Audience"] ?? string.Empty;
             _expirationMinutes = int.Parse(jwtSettings["ExpirationMinutes"] ?? "60");

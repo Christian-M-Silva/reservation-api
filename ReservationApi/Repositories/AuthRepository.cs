@@ -39,7 +39,7 @@ namespace ReservationApi.Repositories
                 if (user == null) return null;
 
                 user.RefreshToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
-                user.ExpirationDateRefreshToken = new DateOnly().AddDays(7);
+                user.ExpirationDateRefreshToken = DateOnly.FromDateTime(DateTime.Today).AddDays(7);
 
                 _dbContext.Entry(user).Property(u => u.RefreshToken).IsModified = true;
                 _dbContext.Entry(user).Property(u => u.ExpirationDateRefreshToken).IsModified = true;
