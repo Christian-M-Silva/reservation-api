@@ -4,12 +4,13 @@ using Microsoft.IdentityModel.Tokens;
 using ReservationApi.Data;
 using ReservationApi.Middlewares.Extensions;
 using ReservationApi.Services;
+using ReservationApi.Settings;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+ConfigureDependeciesInjection.ConfigureDependecyInjection(builder.Services);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

@@ -6,7 +6,7 @@ using ReservationApi.Repositories;
 
 namespace ReservationApi.Services
 {
-    public class ReservationService(IBaseRepository<ReservationEntity> baseRepository, IReservationRepository reservationRepository) : IResevationService
+    public class ReservationService(IBaseRepository<ReservationEntity> baseRepository, IReservationRepository reservationRepository) : IReservationService
     {
         private readonly IBaseRepository<ReservationEntity> _baseRepository = baseRepository;
         private readonly IReservationRepository _reservationRepository = reservationRepository;

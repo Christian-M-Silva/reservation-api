@@ -11,9 +11,9 @@ namespace ReservationApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReservationsController(IResevationService resevationService) : ControllerBase
+    public class ReservationsController(IReservationService resevationService) : ControllerBase
     {
-        private readonly IResevationService _reservationService = resevationService;
+        private readonly IReservationService _reservationService = resevationService;
 
         [Authorize(Roles = "User")]
         [HttpPost]

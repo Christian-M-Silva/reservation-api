@@ -3,7 +3,7 @@ using ReservationApi.Models.Request;
 
 namespace ReservationApi.Interfaces.IServices
 {
-    public interface IResevationService
+    public interface IReservationService
     {
         public Task<ReservationEntity> CreateReservation(ReservationEntity reservation);
         public Task<IEnumerable<ReservationEntity?>> GetReservations(FilterRequest? filterRequest);
