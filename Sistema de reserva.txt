@@ -113,15 +113,15 @@ x Rota de cancelar reserva ADMIN
 
 
 
-- Rota de visualizar todas as reservas Admin
-	- Controller 
-		- chama a servisse se não der erro retorna todas as reservas
+x Rota de visualizar todas as reservas Admin
+	x Controller 
+		x chama a servisse se não der erro retorna todas as reservas
 	x Service
 		x Reaproveitar da interface e método GetReservations em que pego e retorno um array de reservas
 	x Repo
 		x Reaproveitar da interface e método GetReservations em que pego todas as reservas, ordenadas pela data de check-in
 
-- Criar middleware que registrará os dados de acordo com o model da tabela de log, ele chamará a servisse de log e se der erro não é para travar o sistema
+- Criar middleware que registrará os dados de acordo com o model da tabela de log, ele chamará a servisse de log e se der erro não é para travar o sistema (falta fazer o middleware)
 
 - Criar uma Interface e uma servisse de log, que chamará um repo de registrar log repassando os dados 
 
@@ -164,5 +164,6 @@ x Rota de cancelar reserva ADMIN
 	- Testar se ao trazer as reservas eu retorno com a coluna de check-in ordenadar
 	- Testar no GetReservations onde a 
 		- regra ou role de user não precisa passar as querys porem retorna somente os dados do id dele sem filtro e com filtro somente os dados ele
-		- regra ou role de Admin texto com e sem filtro sendo que ele retorna o dado de todos
+		-regra ou role de Admin texto com e sem filtro sendo que ele retorna o dado de todos
+	- Testar se ao acessar as requisições que não são de register e login se ele faz o log
 

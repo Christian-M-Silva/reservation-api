@@ -4,8 +4,8 @@ namespace ReservationApi.Models.Entities
 {
     public class LogEntity : BaseEntity
     {
-        [Required(ErrorMessage = "Request type is required")]
-        public string RequestType { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Method is required")]
+        public string Method { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Route is required")]
         public string Route { get; set; } = string.Empty;

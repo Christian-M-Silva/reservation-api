@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ReservationApi.Data;
+using ReservationApi.Middlewares.Extensions;
 using ReservationApi.Services;
 using System.Text;
 
@@ -61,5 +62,6 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRegisterLogMiddleware();
 
 app.Run();
