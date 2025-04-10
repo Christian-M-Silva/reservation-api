@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ReservationApi.Interfaces.IServices;
 using ReservationApi.Models.Entities;
 using ReservationApi.Models.Enuns;
@@ -58,6 +59,7 @@ namespace ReservationApi.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("refresh-token/{id}")]
         public async Task<ActionResult> RefreshToken(Guid id, string refreshToken)
         {
