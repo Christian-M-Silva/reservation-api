@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using ReservationApi.Data;
 using ReservationApi.Middlewares.Extensions;
 using ReservationApi.Services;
@@ -14,10 +15,23 @@ ConfigureDependeciesInjection.ConfigureDependecyInjection(builder.Services);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    { 
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "Bearer",
+        BearerFormat = "JWT", 
+        In = ParameterLocation.Header, 
+        Description = "Digite seu token JWT no formato: Bearer {seu token}"
+    });
+
+    options.OperationFilter<ConfigureAuthSwagger>();
+});
 
 builder.Services.AddDbContext<MyDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 
@@ -44,7 +58,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddAuthorization(); 
+builder.Services.AddAuthorization();
 builder.Services.AddScoped<JwtService>();
 
 

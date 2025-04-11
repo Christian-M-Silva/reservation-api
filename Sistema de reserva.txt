@@ -121,24 +121,20 @@ x Rota de visualizar todas as reservas Admin
 	x Repo
 		x Reaproveitar da interface e método GetReservations em que pego todas as reservas, ordenadas pela data de check-in
 
-- Criar middleware que registrará os dados de acordo com o model da tabela de log, ele chamará a servisse de log e se der erro não é para travar o sistema (falta fazer o middleware)
+x Criar middleware que registrará os dados de acordo com o model da tabela de log, ele chamará a servisse de log e se der erro não é para travar o sistema (falta fazer o middleware)
 
-- Criar uma Interface e uma servisse de log, que chamará um repo de registrar log repassando os dados 
+x Criar uma Interface e uma servisse de log, que chamará um repo de registrar log repassando os dados 
 
-- Criar uma Interface e um repo de log, que registrará o log na tabela de log 
-
-- Ajeitar a injeção de dependencia 
-
-- Documentar os endpoint da API com descrições detalhadas, posso usar o xml
+x Ajeitar a injeção de dependencia 
 	
-- Toda rota deve ser autenticada com JWT.  
+x Toda rota deve ser autenticada com JWT.  
 
-- Criar as migrations
+x Criar as migrations
 
 -TESTE
-	- Ver se ao criar um usuário ele salva a data de criação
-	- Ver se quando atualiza um dado se data de atualização é feita
-	- Ver o que acontece se eu mandar uma role que não existe
+	X Ver se ao criar um usuário ele salva a data de criação
+	x Ver se quando atualiza um dado se data de atualização é feita
+	x Ver o que acontece se eu mandar uma role que não existe
 	- Testar o refresh token se quando ele expira se ele da 401, pois o refresh token quando expira é para criar um novo jwt, com um novo refresh token
 	- Testar o jwt
 		- Quando expira
@@ -166,4 +162,6 @@ x Rota de visualizar todas as reservas Admin
 		- regra ou role de user não precisa passar as querys porem retorna somente os dados do id dele sem filtro e com filtro somente os dados ele
 		-regra ou role de Admin texto com e sem filtro sendo que ele retorna o dado de todos
 	- Testar se ao acessar as requisições que não são de register e login se ele faz o log
+
+- Documentar os endpoint da API com descrições detalhadas, posso usar o xml
 

@@ -59,7 +59,6 @@ namespace ReservationApi.Controllers
             }
         }
 
-        [Authorize]
         [HttpPut("refresh-token/{id}")]
         public async Task<ActionResult> RefreshToken(Guid id, string refreshToken)
         {
